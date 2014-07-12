@@ -31,7 +31,6 @@
                 <div class="col-md-3 col-md-offset-2">
                     <h3>Base Characteristics</h3>
                 </div>
-
             </div>
 
             <div class="row">
@@ -358,6 +357,40 @@
                                         <span class="glyphicon glyphicon-minus"></span> Remove Skill
                                     </button>
                                 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><br>
+
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2">
+                    <h3>Attributes</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10 col-md-offset-2">
+                    <table class="table charbox">
+                        <thead>
+                            <th>Health</th>
+                            <th>Wound Threshold</th>
+                            <th>Stamina</th>
+                            <th>Magicka Pool</th>
+                            <th>Movement Rating</th>
+                            <th>Initiative Rating</th>
+                            <th>Max AP</th>
+                            <th>Damage Bonus</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{player.health()}}</td>
+                                <td>{{player.woundThreshold()}}</td>
+                                <td>{{player.stamina()}}</td>
+                                <td>{{player.magickaPool()}}</td>
+                                <td>{{player.movementRating()}}</td>
+                                <td>{{player.initRating()}}</td>
+                                <td>{{player.maxAP()}}</td>
+                                <td>{{player.damageBonus()}}</td>
                             </tr>
                         </tbody>
                     </table>

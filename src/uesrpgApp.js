@@ -213,7 +213,7 @@ UESRPG.Player.prototype.pointsSpent = function() {
     total += totalCharacteristic(this.agility(), this.charBuys.ag, this.favoredCharacteristics.ag);
     total += totalCharacteristic(this.intelligence(), this.charBuys.int, this.favoredCharacteristics.int);
     total += totalCharacteristic(this.willpower(), this.charBuys.will, this.favoredCharacteristics.will);
-    total += totalCharacteristic(this.precision(), this.charBuys.prc, this.favoredCharacteristics.prc);
+    total += totalCharacteristic(this.perception(), this.charBuys.prc, this.favoredCharacteristics.prc);
     total += totalCharacteristic(this.personality(), this.charBuys.prs, this.favoredCharacteristics.prs);
     total += totalCharacteristic(this.luck(), this.charBuys.lk, this.favoredCharacteristics.lk);
 
@@ -298,7 +298,7 @@ UESRPG.Player.prototype.intelligence = function() {
 UESRPG.Player.prototype.willpower = function() {
     return this.race.baseStats.will + this.rolls.will + (5 * this.charBuys.will);
 }
-UESRPG.Player.prototype.precision = function() {
+UESRPG.Player.prototype.perception = function() {
     return this.race.baseStats.prc + this.rolls.prc + (5 * this.charBuys.prc);
 }
 UESRPG.Player.prototype.personality = function() {
@@ -306,6 +306,38 @@ UESRPG.Player.prototype.personality = function() {
 }
 UESRPG.Player.prototype.luck = function() {
     return this.rolls.lk + 35 + (5 * this.charBuys.lk);
+}
+UESRPG.Player.prototype.health = function() {
+    return this.endurance();
+}
+UESRPG.Player.prototype.woundThreshold = function() {
+    return Math.floor( (this.endurance() / 10) + (this.strength() / 10) );
+}
+UESRPG.Player.prototype.stamina = function() {
+    return Math.floor( (this.endurance() / 10) + Math.floor(0.5 * (this.willpower() / 10)) );
+}
+UESRPG.Player.prototype.magickaPool = function() {
+    return this.intelligence();
+}
+UESRPG.Player.prototype.movementRating = function() {
+    return Math.floor( this.agility() / 10 );
+}
+UESRPG.Player.prototype.initRating = function() {
+    return Math.floor( (this.agility() / 10) + (this.perception() / 10) );
+}
+UESRPG.Player.prototype.maxAP = function() {
+    var total = Math.floor( (this.agility() / 10) + (this.intelligence() / 10) + (this.perception() / 10) );
+    if (total <= 6) return 1;
+    if (total <= 10) return 2;
+    if (total <= 14) return 3;
+    if (total <= 18) return 4;
+    return 5;
+}
+UESRPG.Player.prototype.damageBonus = function() {
+    return Math.floor( this.strength() / 10 );
+}
+UESRPG.Player.prototype.maxLuckPoints = function() {
+    return Math.floor( this.luck() / 10 );
 }
 
 console.log('starting app');
