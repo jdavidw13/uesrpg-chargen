@@ -12,11 +12,26 @@
         <link href="css/charsheetStyle.css" rel="stylesheet">
     </head>
     <body ng-controller="CharSheetController">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="col-md-3 col-md-offset-3" style="margin-top: 20px;">
+                    <div class="form-group">
+                        <label for="powerLevel">Power Level</label>            
+                        <select ng-model="campaignLevel" ng-options="level.name for level in campaignLevels" id="powerLevel">
+                        </select>             
+                    </div>
+                </div>
+                <div class="col-md-4" style="margin-top: 20px;">
+                    <p>Points [Spent / Total] [{{player.spentCrp}} / {{campaignLevel.cp}}]</p>
+                </div>
+            </div>
+        </nav><br><br><br><br>
         <div class="container">
             <div class="row">
-                <div class="col-md-8 col-md-offset-2">
+                <div class="col-md-3 col-md-offset-2">
                     <h3>Base Characteristics</h3>
                 </div>
+
             </div>
 
             <div class="row">
@@ -79,6 +94,40 @@
                                 <td><strong>{{player.precision()}}</strong></td>
                                 <td><strong>{{player.personality()}}</strong></td>
                                 <td><strong>{{player.luck()}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="fcstr">Favored</label>
+                                    <input type="checkbox" id="fcstr"  ng-model="player.favoredCharacteristics.str">
+                                </td>
+                                <td>
+                                    <label for="fcend">Favored</label>
+                                    <input type="checkbox" id="fcend"  ng-model="player.favoredCharacteristics.end">
+                                </td>
+                                <td>
+                                    <label for="fcag">Favored</label>
+                                    <input type="checkbox" id="fcag"  ng-model="player.favoredCharacteristics.ag">
+                                </td>
+                                <td>
+                                    <label for="fcint">Favored</label>
+                                    <input type="checkbox" id="fcint"  ng-model="player.favoredCharacteristics.int">
+                                </td>
+                                <td>
+                                    <label for="fcwill">Favored</label>
+                                    <input type="checkbox" id="fcwill"  ng-model="player.favoredCharacteristics.will">
+                                </td>
+                                <td>
+                                    <label for="fcprc">Favored</label>
+                                    <input type="checkbox" id="fcprc"  ng-model="player.favoredCharacteristics.prc">
+                                </td>
+                                <td>
+                                    <label for="fcprs">Favored</label>
+                                    <input type="checkbox" id="fcprs"  ng-model="player.favoredCharacteristics.prs">
+                                </td>
+                                <td>
+                                    <label for="fclk">Favored</label>
+                                    <input type="checkbox" id="fclk"  ng-model="player.favoredCharacteristics.lk">
+                                </td>
                             </tr>
                         </tbody>
                     </table>

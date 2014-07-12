@@ -1,4 +1,4 @@
-.charbox tr {
+.charbox tr,th {
     text-align: center;
 }
 .charbox td {

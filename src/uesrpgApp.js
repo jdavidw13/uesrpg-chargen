@@ -123,6 +123,9 @@ UESRPG.birthsigns = {
         }
     ]
 };
+UESRPG.campaignLevels = [
+    { name: 'Low', cp: 1000 }, { name: 'Medium', cp: 2500 }, { name: 'High', cp: 5000 }, { name: 'Legendary', cp: 10000 }
+];
 
 // TODO these don't need to be globally scoped
 window.roll = function(min, max) {
@@ -146,9 +149,13 @@ UESRPG.Player = function() {
     this.rolls = {
         str: 0, end: 0, ag: 0, int: 0, will: 0, prc: 0, prs: 0, lk: 0
     };
+    this.favoredCharacteristics = {
+        str: true, end: true, ag: false, int: false, will: false, prc: false, prs: false, lk: false
+    };
     this.race = UESRPG.races[0];
     this.birthsign = UESRPG.birthsigns.warrior[0];
     this.starCursed = false;
+    this.spentCrp = 0;
 }
 UESRPG.Player.prototype.rollStats = function() {
     this.rollStr();
@@ -229,8 +236,12 @@ var app = angular.module('uesrpgApp', []);
 
 app.controller('CharSheetController', function($scope) {
     $scope.races = UESRPG.races;
+    $scope.characteristics = ['str', 'end', 'ag', 'int', 'will', 'prc', 'prs', 'lk'];
     $scope.birthsigns = UESRPG.birthsigns;
     $scope.player = new UESRPG.Player();
+
+    $scope.campaignLevels = UESRPG.campaignLevels;
+    $scope.campaignLevel = $scope.campaignLevels[0];
 
     $scope.rollStats = function() {
         $scope.player.rollStatus();
