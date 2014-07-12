@@ -1,0 +1,11 @@
+.charbox tr {
+    text-align: center;
+}
+.charbox td {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+.roll:hover {
+    background: #ddd;
+}
