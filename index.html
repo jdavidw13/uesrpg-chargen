@@ -298,7 +298,73 @@
                     </blockquote>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h3>Skills</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-2" style="margin-top:20px;">
+                    <button type="button" class="btn btn-primary" ng-click="player.addSkill()">
+                        <span class="glyphicon glyphicon-plus"></span> Add Skill
+                    </button>
+                </div>
+                <div class="col-md-8">
+                    <table class="table center-align">
+                        <thead>
+                            <th>Skill</th>
+                            <th>Rank</th>
+                            <th>Specializations</th>
+                            <th>Combat Styles</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="skill in player.skills">
+                                <td><input type="text" class="form-control" placeholder="Skill Name" ng-model="skill.name"></td>
+                                <td>
+                                    <p>{{skill.rank.name}}</p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.modifySkillLevel(skill, 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.modifySkillLevel(skill, -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span class="badge">{{skill.specs}}</span>
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="player.modifySkillSpecs(skill, 1)">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="player.modifySkillSpecs(skill, -1)">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>
+                                        <span class="badge">{{skill.combatStyles}}</span>
+                                        <button type="button" class="btn btn-success btn-xs" ng-click="player.modifySkillCombatStyles(skill, 1)">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs" ng-click="player.modifySkillCombatStyles(skill, -1)">
+                                            <span class="glyphicon glyphicon-minus"></span>
+                                        </button>
+                                    </p>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger" ng-click="player.removeSkill($index)">
+                                        <span class="glyphicon glyphicon-minus"></span> Remove Skill
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+        <br><br><br>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="libs/jquery-2.1.1.min.js"></script>

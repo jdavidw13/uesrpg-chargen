@@ -1,3 +1,6 @@
+.center-align tr,th {
+    text-align: center;
+}
 .charbox tr,th {
     text-align: center;
 }

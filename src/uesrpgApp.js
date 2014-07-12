@@ -126,6 +126,14 @@ UESRPG.birthsigns = {
 UESRPG.campaignLevels = [
     { name: 'Low', cp: 1000 }, { name: 'Medium', cp: 2500 }, { name: 'High', cp: 5000 }, { name: 'Legendary', cp: 10000 }
 ];
+UESRPG.skillRanks = [
+    { name: 'Novice', rank: 0 },
+    { name: 'Apprentice', rank: 1 },
+    { name: 'Journeyman', rank: 2 },
+    { name: 'Adept', rank: 3 },
+    { name: 'Expert', rank: 4 },
+    { name: 'Master', rank: 5 }
+];
 
 // TODO these don't need to be globally scoped
 window.roll = function(min, max) {
@@ -158,7 +166,7 @@ UESRPG.Player = function() {
     this.race = UESRPG.races[0];
     this.birthsign = UESRPG.birthsigns.warrior[0];
     this.starCursed = false;
-    this.spentCrp = 0;
+    this.skills = [];
 }
 UESRPG.Player.prototype.rollStats = function() {
     this.rollStr();
@@ -190,6 +198,16 @@ UESRPG.Player.prototype.pointsSpent = function() {
         return crpSpent;
     };
 
+    var totalSkillCost = function(skill) {
+        var crpSpent = 100;
+        for (var i = 1; i <= skill.rank.rank; i++) {
+            crpSpent += (100 * (i-1)) + 100;
+        }
+        crpSpent += (skill.specs * 100);
+        crpSpent += (skill.combatStyles * 25);
+        return crpSpent;
+    };
+
     var total = totalCharacteristic(this.strength(), this.charBuys.str, this.favoredCharacteristics.str);
     total += totalCharacteristic(this.endurance(), this.charBuys.end, this.favoredCharacteristics.end);
     total += totalCharacteristic(this.agility(), this.charBuys.ag, this.favoredCharacteristics.ag);
@@ -199,7 +217,32 @@ UESRPG.Player.prototype.pointsSpent = function() {
     total += totalCharacteristic(this.personality(), this.charBuys.prs, this.favoredCharacteristics.prs);
     total += totalCharacteristic(this.luck(), this.charBuys.lk, this.favoredCharacteristics.lk);
 
+    this.skills.forEach(function(skill) {
+        total += totalSkillCost(skill);
+    });
+
     return total;
+}
+UESRPG.Player.prototype.addSkill = function() {
+    this.skills.push({name: 'Skill', rank: UESRPG.skillRanks[0], specs: 0, combatStyles: 0});
+}
+UESRPG.Player.prototype.removeSkill = function(index) {
+    this.skills.splice(index, 1);
+}
+UESRPG.Player.prototype.modifySkillLevel = function(skill, amount) {
+    var newRank = skill.rank.rank + amount;
+    if (newRank < 0) newRank = 0;
+    if (newRank > 5) newRank = 5;
+
+    skill.rank = UESRPG.skillRanks[newRank];
+}
+UESRPG.Player.prototype.modifySkillSpecs = function(skill, amount) {
+    skill.specs += amount;
+    if (skill.specs < 0) skill.specs = 0;
+}
+UESRPG.Player.prototype.modifySkillCombatStyles = function(skill, amount) {
+    skill.combatStyles += amount;
+    if (skill.combatStyles < 0) skill.combatStyles = 0;
 }
 UESRPG.Player.prototype.rollWarriorBirthsign = function() {
     var birthsign = rollBirthsign(UESRPG.birthsigns.warrior);
