@@ -152,6 +152,9 @@ UESRPG.Player = function() {
     this.favoredCharacteristics = {
         str: true, end: true, ag: false, int: false, will: false, prc: false, prs: false, lk: false
     };
+    this.charBuys = {
+        str: 0, end: 0, ag: 0, int: 0, will: 0, prc: 0, prs: 0, lk: 0
+    };
     this.race = UESRPG.races[0];
     this.birthsign = UESRPG.birthsigns.warrior[0];
     this.starCursed = false;
@@ -166,6 +169,37 @@ UESRPG.Player.prototype.rollStats = function() {
     this.rollPrc();
     this.rollPrs();
     this.rollLk();
+}
+UESRPG.Player.prototype.buyCharacteristic = function(characteristic, amount) {
+    this.charBuys[characteristic] += amount;
+    if (this.charBuys[characteristic] < 0) {
+        this.charBuys[characteristic] = 0;
+    }
+}
+UESRPG.Player.prototype.pointsSpent = function() {
+    var totalCharacteristic = function(value, buys, favored) {
+        var crpSpent = 0;
+        var currentValue = value - (5 * buys);
+        for (var i = 0; i < buys; i++) {
+            crpSpent += Math.floor(Math.floor(currentValue/10) * 100);
+            currentValue += 5;
+        }
+        if (favored) {
+            crpSpent = Math.floor(crpSpent/2);
+        }
+        return crpSpent;
+    };
+
+    var total = totalCharacteristic(this.strength(), this.charBuys.str, this.favoredCharacteristics.str);
+    total += totalCharacteristic(this.endurance(), this.charBuys.end, this.favoredCharacteristics.end);
+    total += totalCharacteristic(this.agility(), this.charBuys.ag, this.favoredCharacteristics.ag);
+    total += totalCharacteristic(this.intelligence(), this.charBuys.int, this.favoredCharacteristics.int);
+    total += totalCharacteristic(this.willpower(), this.charBuys.will, this.favoredCharacteristics.will);
+    total += totalCharacteristic(this.precision(), this.charBuys.prc, this.favoredCharacteristics.prc);
+    total += totalCharacteristic(this.personality(), this.charBuys.prs, this.favoredCharacteristics.prs);
+    total += totalCharacteristic(this.luck(), this.charBuys.lk, this.favoredCharacteristics.lk);
+
+    return total;
 }
 UESRPG.Player.prototype.rollWarriorBirthsign = function() {
     var birthsign = rollBirthsign(UESRPG.birthsigns.warrior);
@@ -207,28 +241,28 @@ UESRPG.Player.prototype.rollLk = function() {
     this.rolls.lk = roll(1,10) + roll(1,10);
 }
 UESRPG.Player.prototype.strength = function() {
-    return this.race.baseStats.str + this.rolls.str;
+    return this.race.baseStats.str + this.rolls.str + (5 * this.charBuys.str);
 }
 UESRPG.Player.prototype.endurance = function() {
-    return this.race.baseStats.end + this.rolls.end;
+    return this.race.baseStats.end + this.rolls.end + (5 * this.charBuys.end);
 }
 UESRPG.Player.prototype.agility = function() {
-    return this.race.baseStats.ag + this.rolls.ag;
+    return this.race.baseStats.ag + this.rolls.ag + (5 * this.charBuys.ag);
 }
 UESRPG.Player.prototype.intelligence = function() {
-    return this.race.baseStats.int + this.rolls.int;
+    return this.race.baseStats.int + this.rolls.int + (5 * this.charBuys.int);
 }
 UESRPG.Player.prototype.willpower = function() {
-    return this.race.baseStats.will + this.rolls.will;
+    return this.race.baseStats.will + this.rolls.will + (5 * this.charBuys.will);
 }
 UESRPG.Player.prototype.precision = function() {
-    return this.race.baseStats.prc + this.rolls.prc;
+    return this.race.baseStats.prc + this.rolls.prc + (5 * this.charBuys.prc);
 }
 UESRPG.Player.prototype.personality = function() {
-    return this.race.baseStats.prs + this.rolls.prs;
+    return this.race.baseStats.prs + this.rolls.prs + (5 * this.charBuys.prs);
 }
 UESRPG.Player.prototype.luck = function() {
-    return this.rolls.lk + 35;
+    return this.rolls.lk + 35 + (5 * this.charBuys.lk);
 }
 
 console.log('starting app');

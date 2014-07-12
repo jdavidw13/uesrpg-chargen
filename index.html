@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="col-md-4" style="margin-top: 20px;">
-                    <p>Points [Spent / Total] [{{player.spentCrp}} / {{campaignLevel.cp}}]</p>
+                    <p>Points [Spent / Total] [{{player.pointsSpent()}} / {{campaignLevel.cp}}]</p>
                 </div>
             </div>
         </nav><br><br><br><br>
@@ -127,6 +127,80 @@
                                 <td>
                                     <label for="fclk">Favored</label>
                                     <input type="checkbox" id="fclk"  ng-model="player.favoredCharacteristics.lk">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.str}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('str', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('str', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.end}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('end', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('end', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.ag}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('ag', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('ag', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.int}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('int', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('int', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.will}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('will', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('will', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.prc}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('prc', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('prc', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.prs}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('prs', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('prs', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <p>Buys <span class="badge">{{player.charBuys.lk}}</span></p>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="player.buyCharacteristic('lk', 1)">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="player.buyCharacteristic('lk', -1)">
+                                        <span class="glyphicon glyphicon-minus"></span>
+                                    </button>
                                 </td>
                             </tr>
                         </tbody>
