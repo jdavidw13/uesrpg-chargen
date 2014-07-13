@@ -163,6 +163,9 @@ UESRPG.Player = function() {
     this.charBuys = {
         str: 0, end: 0, ag: 0, int: 0, will: 0, prc: 0, prs: 0, lk: 0
     };
+    this.birthsignMods = {
+        str: '0', end: '0', ag: '0', int: '0', will: '0', prc: '0', prs: '0', lk: '0', health: '0'
+    };
     this.race = UESRPG.races[0];
     this.birthsign = UESRPG.birthsigns.warrior[0];
     this.starCursed = false;
@@ -284,31 +287,35 @@ UESRPG.Player.prototype.rollLk = function() {
     this.rolls.lk = roll(1,10) + roll(1,10);
 }
 UESRPG.Player.prototype.strength = function() {
-    return this.race.baseStats.str + this.rolls.str + (5 * this.charBuys.str);
+    return this.race.baseStats.str + this.rolls.str + (5 * this.charBuys.str) + parseInt(this.birthsignMods.str);
 }
 UESRPG.Player.prototype.endurance = function() {
-    return this.race.baseStats.end + this.rolls.end + (5 * this.charBuys.end);
+    return this.race.baseStats.end + this.rolls.end + (5 * this.charBuys.end) + parseInt(this.birthsignMods.end);
 }
 UESRPG.Player.prototype.agility = function() {
-    return this.race.baseStats.ag + this.rolls.ag + (5 * this.charBuys.ag);
+    return this.race.baseStats.ag + this.rolls.ag + (5 * this.charBuys.ag) + parseInt(this.birthsignMods.ag);
 }
 UESRPG.Player.prototype.intelligence = function() {
-    return this.race.baseStats.int + this.rolls.int + (5 * this.charBuys.int);
+    return this.race.baseStats.int + this.rolls.int + (5 * this.charBuys.int) + parseInt(this.birthsignMods.int);
 }
 UESRPG.Player.prototype.willpower = function() {
-    return this.race.baseStats.will + this.rolls.will + (5 * this.charBuys.will);
+    return this.race.baseStats.will + this.rolls.will + (5 * this.charBuys.will) + parseInt(this.birthsignMods.will);
 }
 UESRPG.Player.prototype.perception = function() {
-    return this.race.baseStats.prc + this.rolls.prc + (5 * this.charBuys.prc);
+    return this.race.baseStats.prc + this.rolls.prc + (5 * this.charBuys.prc) + parseInt(this.birthsignMods.prc);
 }
 UESRPG.Player.prototype.personality = function() {
-    return this.race.baseStats.prs + this.rolls.prs + (5 * this.charBuys.prs);
+    return this.race.baseStats.prs + this.rolls.prs + (5 * this.charBuys.prs) + parseInt(this.birthsignMods.prs);
 }
 UESRPG.Player.prototype.luck = function() {
-    return this.rolls.lk + 35 + (5 * this.charBuys.lk);
+    return this.rolls.lk + 35 + (5 * this.charBuys.lk) + parseInt(this.birthsignMods.lk);
 }
 UESRPG.Player.prototype.health = function() {
-    return this.endurance();
+    var amount = this.birthsignMods.health;
+    if (amount.indexOf('%') >= 0) {
+        return Math.ceil( this.endurance() * parseFloat('1.' + amount.replace(/%/g, '')) ); 
+    }
+    return this.endurance() + parseInt(amount);
 }
 UESRPG.Player.prototype.woundThreshold = function() {
     return Math.floor( (this.endurance() / 10) + (this.strength() / 10) );

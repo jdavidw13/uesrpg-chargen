@@ -47,7 +47,7 @@
                     <table class="table charbox">
                         <thead>
                             <tr>
-                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Precision</th><th>Personality</th><th>Luck</th>
+                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Perception</th><th>Personality</th><th>Luck</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,7 +80,7 @@
                     <table class="table charbox">
                         <thead>
                             <tr>
-                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Precision</th><th>Personality</th><th>Luck</th>
+                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Perception</th><th>Personality</th><th>Luck</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,7 +90,7 @@
                                 <td><strong>{{player.agility()}}</strong></td>
                                 <td><strong>{{player.intelligence()}}</strong></td>
                                 <td><strong>{{player.willpower()}}</strong></td>
-                                <td><strong>{{player.precision()}}</strong></td>
+                                <td><strong>{{player.perception()}}</strong></td>
                                 <td><strong>{{player.personality()}}</strong></td>
                                 <td><strong>{{player.luck()}}</strong></td>
                             </tr>
@@ -215,7 +215,7 @@
                     <table class="table charbox">
                         <thead>
                             <tr>
-                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Precision</th><th>Personality</th><th>Luck</th>
+                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Perception</th><th>Personality</th><th>Luck</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -282,6 +282,33 @@
                             <input type="checkbox" ng-model="player.starCursed"> Star Cursed
                         </label>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2" style="margin-top:20px;">
+                    <p><em>Birthsign Modifiers</em></p>
+                </div>
+                <div class="col-md-8">
+                    <table class="table charbox">
+                        <thead>
+                            <tr>
+                                <th>Strength</th><th>Endurance</th><th>Agility</th><th>Intelligence</th><th>Willpower</th><th>Perception</th><th>Personality</th><th>Luck</th><th>Health</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.str"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.end"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.ag"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.int"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.will"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.prc"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.prs"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.lk"></td>
+                                <td><input type="text" class="form-control" ng-model="player.birthsignMods.health"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
